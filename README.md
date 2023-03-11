@@ -8,4 +8,4 @@
 
 > the condition of being physically fit and healthy.
 
-A workout tracking app.
+An app for tracking workout routines.
