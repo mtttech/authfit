@@ -1,0 +1,11 @@
+MusclesWorkedSelector {
+    layout: vertical;
+}
+
+ExerciseSelector {
+    content-align: center middle;
+}
+
+Button {
+    width: 40;
+}

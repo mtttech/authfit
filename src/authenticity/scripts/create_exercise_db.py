@@ -1,9 +1,4 @@
 """
-adductors
-biceps
-calves
-chest
-forearms
 glutes
 hamstrings
 lats
@@ -31,7 +26,7 @@ EXERCISE_DATABASE = os.path.join(APP_DIR, "assets/exercises.db")
 conn = sqlite3.connect(EXERCISE_DATABASE)
 curs = conn.cursor()
 
-muscle = "abductors"
+muscle = "forearms"
 api_url = "https://api.api-ninjas.com/v1/exercises?muscle={}".format(muscle)
 response = requests.get(
     api_url, headers={"X-Api-Key": "EUkhC02XAhP6mI+RdxAzWA==L1mQza6laXxzy97V"}
@@ -42,7 +37,6 @@ if response.status_code == requests.codes.ok:
             "INSERT INTO exercises (name, type, muscle, equipment, difficulty, instructions) VALUES(?,?,?,?,?,?)",
             exercise_row,
         )
-        #print(get_exercise_json_payload(response.text))
         conn.commit()
 else:
     print("Error:", response.status_code, response.text)
