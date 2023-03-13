@@ -12,7 +12,7 @@ class AuthenticityExerciseDB:
     def get_muscles_worked_list(self):
         self.curs.execute("SELECT DISTINCT muscle FROM exercises")
         return self.curs.fetchall()
-    
+
     def get_exercises(self):
         self.curs.execute("SELECT EID, name FROM exercises")
         return self.curs.fetchall()
