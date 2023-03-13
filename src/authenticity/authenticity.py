@@ -16,31 +16,41 @@ class ExerciseInfoBox(customtkinter.CTkFrame):
         self.label_type = customtkinter.CTkLabel(self, text="Type")
         self.label_type.grid(row=0, column=0)
         # Type Entry
-        self.label_type_entry = customtkinter.CTkEntry(self, width=400, state="disabled")
+        self.label_type_entry = customtkinter.CTkEntry(
+            self, width=400, state="disabled"
+        )
         self.label_type_entry.grid(row=1, column=0)
         # Muscle Label
         self.label_muscle = customtkinter.CTkLabel(self, text="Muscle")
         self.label_muscle.grid(row=2, column=0)
         # Muscle Entry
-        self.label_muscle_entry = customtkinter.CTkEntry(self, width=400, state="disabled")
+        self.label_muscle_entry = customtkinter.CTkEntry(
+            self, width=400, state="disabled"
+        )
         self.label_muscle_entry.grid(row=3, column=0)
         # Equipment Label
         self.label_equip = customtkinter.CTkLabel(self, text="Equipment")
         self.label_equip.grid(row=4, column=0)
         # Equipment Entry
-        self.label_equip_entry = customtkinter.CTkEntry(self, width=400, state="disabled")
+        self.label_equip_entry = customtkinter.CTkEntry(
+            self, width=400, state="disabled"
+        )
         self.label_equip_entry.grid(row=5, column=0)
         # Difficulty Label
         self.label_difficulty = customtkinter.CTkLabel(self, text="Difficulty")
         self.label_difficulty.grid(row=6, column=0)
         # Difficulty Entry
-        self.label_difficulty_entry = customtkinter.CTkEntry(self, width=400, state="disabled")
+        self.label_difficulty_entry = customtkinter.CTkEntry(
+            self, width=400, state="disabled"
+        )
         self.label_difficulty_entry.grid(row=7, column=0)
         # Infobox Label
         self.label_infobox = customtkinter.CTkLabel(self, text="Instruction")
         self.label_infobox.grid(row=8, column=0)
         # Infobox Textbox
-        self.textbox_infobox = customtkinter.CTkTextbox(self, width=400, state="disabled")
+        self.textbox_infobox = customtkinter.CTkTextbox(
+            self, width=400, state="disabled"
+        )
         self.textbox_infobox.grid(row=9, column=0, sticky="nsew")
 
 
@@ -79,7 +89,10 @@ class Authenticity(customtkinter.CTk):
         self.muscle_selector_optionemenu.grid(row=1, column=0, padx=20, pady=20)
         # Exercise Group Entry
         self.exercise_selector_optionemenu = customtkinter.CTkOptionMenu(
-            self.selector_frame, values=exercises_by_muscle_list, width=300
+            self.selector_frame,
+            values=exercises_by_muscle_list,
+            width=300,
+            state="disabled",
         )
         self.exercise_selector_optionemenu.grid(row=1, column=1, padx=20, pady=20)
         # Exercise Info Box
@@ -87,7 +100,7 @@ class Authenticity(customtkinter.CTk):
         self.info_frame.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
 
         # End main frame window.
-        self.selector_frame.grid(row=0, column=0, padx=20)
+        self.selector_frame.grid(row=0, column=0, padx=0)
 
 
 def main():

@@ -16,7 +16,7 @@ class ExerciseDatabase:
     def get_exercises_by_muscle_list(self):
         self.curs.execute("SELECT EID, name FROM exercises")
         return self.curs.fetchall()
-    
+
     def get_exercises_entry(self):
         self.curs.execute("SELECT EID, name FROM exercises")
         return self.curs.fetchall()
