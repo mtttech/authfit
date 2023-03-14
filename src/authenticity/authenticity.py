@@ -65,8 +65,6 @@ class Authenticity(customtkinter.CTk):
 
         muscles_worked_list = db.get_muscles_worked_list()
         muscles_worked_list = [m[0] for m in muscles_worked_list]
-        exercises_by_muscle_list = db.get_exercises_by_muscle_list()
-        exercises_by_muscle_list = [e[1] for e in exercises_by_muscle_list]
 
         # Start main frame window.
         self.selector_frame = customtkinter.CTkFrame(self, width=1100)
@@ -82,17 +80,22 @@ class Authenticity(customtkinter.CTk):
         )
         self.muscle_selector_label.grid(row=0, column=1, padx=0, pady=0)
 
-        # Muscle Group Entry
+        # Muscle Group Option Menu
         self.muscle_selector_optionemenu = customtkinter.CTkOptionMenu(
-            self.selector_frame, values=muscles_worked_list, width=300
+            self.selector_frame,
+            values=muscles_worked_list,
+            width=300,
+            command=self.activate_exercise_option_menu,
+            anchor="center",
         )
         self.muscle_selector_optionemenu.grid(row=1, column=0, padx=20, pady=20)
-        # Exercise Group Entry
+        # Exercise Group Option Menu
         self.exercise_selector_optionemenu = customtkinter.CTkOptionMenu(
             self.selector_frame,
-            values=exercises_by_muscle_list,
+            values=["Select Muscle Group"],
             width=300,
             state="disabled",
+            anchor="center",
         )
         self.exercise_selector_optionemenu.grid(row=1, column=1, padx=20, pady=20)
         # Exercise Info Box
@@ -101,6 +104,14 @@ class Authenticity(customtkinter.CTk):
 
         # End main frame window.
         self.selector_frame.grid(row=0, column=0, padx=0)
+
+    def activate_exercise_option_menu(self, choice):
+        exercises_by_muscle_list = db.get_exercises_by_muscle_list(choice)
+        exercises_by_muscle_list = [e[1] for e in exercises_by_muscle_list]
+        self.exercise_selector_optionemenu.configure(
+            state="normal", values=exercises_by_muscle_list
+        )
+        self.exercise_selector_optionemenu.set(exercises_by_muscle_list[0])
 
 
 def main():
