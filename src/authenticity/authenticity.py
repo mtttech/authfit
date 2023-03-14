@@ -20,14 +20,6 @@ class ExerciseInfoBox(customtkinter.CTkFrame):
             self, width=400, state="disabled"
         )
         self.label_type_entry.grid(row=1, column=0)
-        # Muscle Label
-        self.label_muscle = customtkinter.CTkLabel(self, text="Muscle")
-        self.label_muscle.grid(row=2, column=0)
-        # Muscle Entry
-        self.label_muscle_entry = customtkinter.CTkEntry(
-            self, width=400, state="disabled"
-        )
-        self.label_muscle_entry.grid(row=3, column=0)
         # Equipment Label
         self.label_equip = customtkinter.CTkLabel(self, text="Equipment")
         self.label_equip.grid(row=4, column=0)
@@ -95,12 +87,13 @@ class Authenticity(customtkinter.CTk):
             values=["Select Muscle Group"],
             width=300,
             state="disabled",
+            command=self.fill_exercise_info_box,
             anchor="center",
         )
         self.exercise_selector_optionemenu.grid(row=1, column=1, padx=20, pady=20)
         # Exercise Info Box
-        self.info_frame = ExerciseInfoBox(self.selector_frame)
-        self.info_frame.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
+        self.infobox_frame = ExerciseInfoBox(self.selector_frame)
+        self.infobox_frame.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
 
         # End main frame window.
         self.selector_frame.grid(row=0, column=0, padx=0)
@@ -112,6 +105,24 @@ class Authenticity(customtkinter.CTk):
             state="normal", values=exercises_by_muscle_list
         )
         self.exercise_selector_optionemenu.set(exercises_by_muscle_list[0])
+
+    def fill_exercise_info_box(self, choice):
+        exercise_type, equipment, difficulty, instructions = db.get_exercise_entry(choice)[0]
+        self.infobox_frame.label_type_entry.configure(state="normal")
+        self.infobox_frame.label_type_entry.insert(0, exercise_type)
+        self.infobox_frame.label_type_entry.configure(state="disabled")
+
+        self.infobox_frame.label_equip_entry.configure(state="normal")
+        self.infobox_frame.label_equip_entry.insert(0, equipment)
+        self.infobox_frame.label_equip_entry.configure(state="disabled")
+
+        self.infobox_frame.label_difficulty_entry.configure(state="normal")
+        self.infobox_frame.label_difficulty_entry.insert(0, difficulty)
+        self.infobox_frame.label_difficulty_entry.configure(state="disabled")
+
+        self.infobox_frame.textbox_infobox.configure(state="normal")
+        self.infobox_frame.textbox_infobox.insert(1.0, instructions)
+        self.infobox_frame.textbox_infobox.configure(state="disabled")
 
 
 def main():

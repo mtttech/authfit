@@ -19,6 +19,6 @@ class ExerciseDatabase:
         )
         return self.curs.fetchall()
 
-    def get_exercises_entry(self):
-        self.curs.execute("SELECT EID, name FROM exercises")
+    def get_exercise_entry(self, name):
+        self.curs.execute("SELECT type, equipment, difficulty, instructions FROM exercises WHERE name=?", (name,))
         return self.curs.fetchall()
