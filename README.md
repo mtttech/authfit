@@ -10,7 +10,7 @@
 
 The ultimate goal is to create an app for tracking workouts as well as serving as a database for exercises.
 
-Currently, only one aspect of the program is: the exercise database.
+Currently, only one aspect of the program is working: the exercise database.
 
 The exercise information within the database is borrowed from [API Ninjas'](https://www.api-ninjas.com) exercise API.
 
