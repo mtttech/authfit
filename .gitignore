@@ -136,5 +136,5 @@ dmypy.json
 # OS Specific
 .DS_Store
 
-# Testing file
-test.py
+# Scripts
+scripts/
