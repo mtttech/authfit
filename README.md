@@ -19,3 +19,7 @@ The exercise information within the database is borrowed from [API Ninjas'](http
 Authenticity Fitness requires the following library.
 
 * customtkinter
+
+## Usage
+
+![Usage](Usage.png)
