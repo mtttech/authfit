@@ -12,8 +12,10 @@ The ultimate goal is to create an app for tracking workouts as well as serving a
 
 Currently, only one aspect of the program is: the exercise database.
 
-The information in the database is borrowed from [https://www.api-ninjas.com](api-ninjas'), exercise API.
+The exercise information within the database is borrowed from [API Ninjas'](https://www.api-ninjas.com) exercise API.
 
 ## Requirements
+
+Authenticity Fitness requires the following library.
 
 * customtkinter
