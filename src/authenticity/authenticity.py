@@ -6,20 +6,20 @@ customtkinter.set_appearance_mode("System")
 customtkinter.set_default_color_theme("blue")
 
 
-afedb = ExerciseDatabase()
+exercise_database = ExerciseDatabase()
 
 
 class ExerciseInfoBox(customtkinter.CTkFrame):
-    INPUT_WIDTH = 300
+    INPUT_WIDGET_WIDTH = 300
 
     def __init__(self, master) -> None:
-        super().__init__(master, width=self.INPUT_WIDTH)
+        super().__init__(master, width=self.INPUT_WIDGET_WIDTH)
         # Type Label
         self.label_type = customtkinter.CTkLabel(self, text="Type")
         self.label_type.grid(row=0, column=0)
         # Type Entry
         self.label_type_entry = customtkinter.CTkEntry(
-            self, width=self.INPUT_WIDTH, state="disabled"
+            self, width=self.INPUT_WIDGET_WIDTH, state="disabled"
         )
         self.label_type_entry.grid(row=1, column=0)
         # Equipment Label
@@ -27,7 +27,7 @@ class ExerciseInfoBox(customtkinter.CTkFrame):
         self.label_equip.grid(row=4, column=0)
         # Equipment Entry
         self.label_equip_entry = customtkinter.CTkEntry(
-            self, width=self.INPUT_WIDTH, state="disabled"
+            self, width=self.INPUT_WIDGET_WIDTH, state="disabled"
         )
         self.label_equip_entry.grid(row=5, column=0)
         # Difficulty Label
@@ -35,7 +35,7 @@ class ExerciseInfoBox(customtkinter.CTkFrame):
         self.label_difficulty.grid(row=6, column=0)
         # Difficulty Entry
         self.label_difficulty_entry = customtkinter.CTkEntry(
-            self, width=self.INPUT_WIDTH, state="disabled"
+            self, width=self.INPUT_WIDGET_WIDTH, state="disabled"
         )
         self.label_difficulty_entry.grid(row=7, column=0)
         # Infobox Label
@@ -43,7 +43,7 @@ class ExerciseInfoBox(customtkinter.CTkFrame):
         self.label_infobox.grid(row=8, column=0)
         # Infobox Textbox
         self.textbox_infobox = customtkinter.CTkTextbox(
-            self, width=self.INPUT_WIDTH, state="disabled"
+            self, width=self.INPUT_WIDGET_WIDTH, state="disabled"
         )
         self.textbox_infobox.grid(row=9, column=0, sticky="nsew")
 
@@ -57,7 +57,7 @@ class Authenticity(customtkinter.CTk):
         self.grid_rowconfigure(1, weight=1)
         self.grid_columnconfigure((0, 1), weight=1)
 
-        muscles_worked_list = afedb.get_muscles_worked_list()
+        muscles_worked_list = exercise_database.get_muscles_worked_list()
         muscles_worked_list = [m[0] for m in muscles_worked_list]
 
         # Start main frame window.
@@ -98,14 +98,14 @@ class Authenticity(customtkinter.CTk):
         self.main_window.grid(row=0, column=0, padx=0)
 
     @staticmethod
-    def __change_disabled_input_value(widget, index, value) -> None:
+    def _change_disabled_input_value(widget, index, value) -> None:
         widget.configure(state="normal")
         widget.delete(index, "end")
         widget.insert(index, value)
         widget.configure(state="disabled")
 
     def activate_exercise_option_menu(self, choice) -> None:
-        exercises_by_muscle_list = afedb.get_exercises_by_muscle_list(choice)
+        exercises_by_muscle_list = exercise_database.get_exercises_by_muscle_list(choice)
         exercises_by_muscle_list = [e[1] for e in exercises_by_muscle_list]
         self.exercise_selector_optionemenu.configure(
             state="normal", values=exercises_by_muscle_list
@@ -113,23 +113,23 @@ class Authenticity(customtkinter.CTk):
         self.exercise_selector_optionemenu.set(exercises_by_muscle_list[0])
 
     def fill_exercise_info_box(self, choice) -> None:
-        exercise_type, equipment, difficulty, instructions = afedb.get_exercise_entry(
+        exercise_type, equipment, difficulty, instructions = exercise_database.get_exercise_entry(
             choice
         )[0]
         # Exercise type
-        Authenticity.__change_disabled_input_value(
+        Authenticity._change_disabled_input_value(
             self.infobox_frame.label_type_entry, 0, exercise_type
         )
         # Exercise equipment
-        Authenticity.__change_disabled_input_value(
+        Authenticity._change_disabled_input_value(
             self.infobox_frame.label_equip_entry, 0, equipment
         )
         # Exercise difficulty
-        Authenticity.__change_disabled_input_value(
+        Authenticity._change_disabled_input_value(
             self.infobox_frame.label_difficulty_entry, 0, difficulty
         )
         # Exercise instructions
-        Authenticity.__change_disabled_input_value(
+        Authenticity._change_disabled_input_value(
             self.infobox_frame.textbox_infobox, 1.0, instructions
         )
 
