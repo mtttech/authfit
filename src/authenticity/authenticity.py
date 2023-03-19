@@ -95,7 +95,7 @@ class Authenticity(customtkinter.CTk):
         self.infobox_frame = ExerciseInfoBox(self.main_window)
         self.infobox_frame.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
         # End main frame window.
-        self.main_window.grid(row=0, column=0, padx=0)
+        self.main_window.grid(row=0, column=0, padx=0, sticky="nsew")
 
     @staticmethod
     def _change_disabled_input_value(widget, index, value) -> None:
