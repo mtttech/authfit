@@ -1,24 +1,22 @@
 # AUTHENTICITY FITNESS
 
-### Authencity
+> ### Authencity
+> - the quality of being authentic.
 
-> the quality of being authentic.
+> ### Fitness
+> - the condition of being physically fit and healthy.
 
-### Fitness
+The ultimate goal for this project is the creation of an application to track my workouts. It has the secondary purpose of serving as an information database for exercises.
 
-> the condition of being physically fit and healthy.
+Currently, one part of this program is functional: the exercise database.
 
-The ultimate goal is to create an app for tracking workouts as well as serving as a database for exercises.
-
-Currently, only one aspect of the program is working: the exercise database.
-
-The exercise information within the database is borrowed from [API Ninjas'](https://www.api-ninjas.com) exercise API.
+The exercise information within the database is borrowed from [API Ninjas](https://www.api-ninjas.com), using their exercise API.
 
 ## Requirements
 
-Authenticity Fitness requires the following library.
+Authenticity Fitness requires the following python library.
 
-* customtkinter
+* [customtkinter](https://github.com/TomSchimansky/CustomTkinter)
 
 ## Usage
 
