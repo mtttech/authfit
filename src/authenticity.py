@@ -1,13 +1,13 @@
 import customtkinter
 
-from assets import ExerciseDatabase
-from widgets import ExerciseInfoBox
+from .assets import ExerciseDatabase
+from .widgets import ExerciseInfoBox
 
 customtkinter.set_appearance_mode("System")
 customtkinter.set_default_color_theme("blue")
 
 
-exercise_database = ExerciseDatabase()
+DB_EXERCISES = ExerciseDatabase()
 
 
 class Authenticity(customtkinter.CTk):
@@ -19,7 +19,7 @@ class Authenticity(customtkinter.CTk):
         self.grid_rowconfigure(1, weight=1)
         self.grid_columnconfigure((0, 1), weight=1)
 
-        muscles_worked_list = exercise_database.get_muscles_worked_list()
+        muscles_worked_list = DB_EXERCISES.get_muscles_worked_list()
         muscles_worked_list = [m[0] for m in muscles_worked_list]
 
         # Start main frame window.
@@ -60,7 +60,7 @@ class Authenticity(customtkinter.CTk):
         self.main_window.grid(row=0, column=0, padx=0, sticky="nsew")
 
     def _activate_exercise_option_menu(self, choice) -> None:
-        exercises_by_muscle_list = exercise_database.get_exercises_by_muscle_list(choice)
+        exercises_by_muscle_list = DB_EXERCISES.get_exercises_by_muscle_list(choice)
         exercises_by_muscle_list = [e[1] for e in exercises_by_muscle_list]
         self.exercise_selector_optionemenu.configure(
             state="normal", values=exercises_by_muscle_list
@@ -75,7 +75,7 @@ class Authenticity(customtkinter.CTk):
         widget.configure(state="disabled")
 
     def _fill_exercise_info_box(self, choice) -> None:
-        exercise_type, equipment, difficulty, instructions = exercise_database.get_exercise_entry(
+        exercise_type, equipment, difficulty, instructions = DB_EXERCISES.get_exercise_entry(
             choice
         )[0]
         # Exercise type

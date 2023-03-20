@@ -20,4 +20,6 @@ Authenticity Fitness requires the following python library.
 
 ## Usage
 
-![Usage](Usage.png)
+```
+python -m src
+```
