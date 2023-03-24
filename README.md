@@ -8,7 +8,9 @@
 
 The ultimate goal for this project is the creation of an application to track my workouts. It has the secondary purpose of serving as an information database for exercises.
 
-Currently, one part of this program is functional: the exercise database.
+One part of this program is functional: the exercise database.
+
+I'm currently mapping out and planning the actual workout logging portion of the application.
 
 The exercise information within the database is borrowed from [API Ninjas](https://www.api-ninjas.com), using their exercise API.
 
@@ -21,5 +23,9 @@ Authenticity Fitness requires the following python library.
 ## Usage
 
 ```
+git clone https://https://github.com/mtttech/authenticity-fitness.git
+
+cd authenticity-fitness
+
 python -m src
 ```
