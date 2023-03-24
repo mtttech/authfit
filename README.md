@@ -10,7 +10,7 @@ The ultimate goal for this project is the creation of an application to track my
 
 One part of this program is functional: the exercise database.
 
-I'm currently mapping out and planning the actual workout logging portion of the application.
+I'm currently mapping out the actual workout logging portion of the application.
 
 The exercise information within the database is borrowed from [API Ninjas](https://www.api-ninjas.com), using their exercise API.
 
