@@ -42,7 +42,7 @@ class AuthenticityMainWindow(customtkinter.CTkFrame):
         self.infobox_frame.grid(row=4, column=0, padx=15, pady=(30, 20))
 
         ## COL 2
-        self.workout_calender = WorkoutCalender(self)
+        self.workout_calender = _WorkoutCalender(self)
         self.workout_calender.grid(row=0, column=1, rowspan=5, padx=0, pady=0, sticky="nsew")
 
     def _activate_exercise_option_menu(self, choice) -> None:
@@ -129,7 +129,7 @@ class _ExerciseInfoBox(customtkinter.CTkFrame):
         self.textbox_infobox.grid(row=9, column=0, padx=15, pady=(0, 15), sticky="nsew")
 
 
-class WorkoutCalender(customtkinter.CTkTabview):
+class _WorkoutCalender(customtkinter.CTkTabview):
 
     def __init__(self, master):
         super().__init__(master)
@@ -156,9 +156,10 @@ class WorkoutCalender(customtkinter.CTkTabview):
 
 
 class _WorkoutTab(customtkinter.CTkFrame):
+    INPUT_WIDGET_WIDTH = 400
 
     def __init__(self, master, text):
-        super().__init__(master)
+        super().__init__(master, width=self.INPUT_WIDGET_WIDTH)
 
         self.tab_label = customtkinter.CTkLabel(self, text=text)
         self.tab_label.grid(row=0, column=0, padx=0, pady=0)
