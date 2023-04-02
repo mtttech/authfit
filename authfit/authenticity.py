@@ -2,7 +2,7 @@ import os
 
 import customtkinter
 
-from .panels.exerciseinfo import ExercisePanel
+from .gui import AuthenticityMainWindow
 
 
 customtkinter.set_appearance_mode("System")
@@ -18,13 +18,12 @@ class Authenticity(customtkinter.CTk):
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure((0, 1), weight=1)
 
-        # Start Main Window.
+        # Authenticity Main Window.
         self.main_window = customtkinter.CTkFrame(self)
-        # Exercise info panel
-        self.exercise_panel = ExercisePanel(self.main_window)
-        self.exercise_panel.grid(row=0, column=0)
-        # End Main Window.
         self.main_window.grid(row=0, column=0, padx=0, sticky="nsew")
+        # Authenticity App Window
+        self.app_window = AuthenticityMainWindow(self.main_window)
+        self.app_window.grid(row=0, column=0)
 
 
 def main() -> None:

@@ -14,11 +14,13 @@ I'm currently mapping out the actual workout logging portion of the application.
 
 The exercise information within the database is borrowed from [API Ninjas](https://www.api-ninjas.com), using their exercise API.
 
+
 ## Requirements
 
 Authenticity Fitness requires the following python library.
 
 * [customtkinter](https://github.com/TomSchimansky/CustomTkinter)
+
 
 ## Usage
 
@@ -27,5 +29,5 @@ git clone https://https://github.com/mtttech/authenticity-fitness.git
 
 cd authenticity-fitness
 
-python -m src
+python -m authfit
 ```
