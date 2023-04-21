@@ -43,13 +43,15 @@ class AuthenticityMainWindow(customtkinter.CTkFrame):
 
         ## COL 2
         self.workout_calender = _WorkoutCalender(self)
-        self.workout_calender.grid(row=0, column=1, rowspan=5, padx=0, pady=0, sticky="nsew")
+        self.workout_calender.grid(
+            row=0, column=1, rowspan=5, padx=0, pady=0, sticky="nsew"
+        )
 
     def _activate_exercise_option_menu(self, choice) -> None:
         exercises_by_muscle_list = self.DB_EXERCISES.get_exercises_by_muscle_list(
             choice
         )
-        exercises_by_muscle_list = [e[1] for e in exercises_by_muscle_list]
+        exercises_by_muscle_list = [e[0] for e in exercises_by_muscle_list]
         self.exercise_selector_optionemenu.configure(
             state="normal", values=exercises_by_muscle_list
         )
@@ -130,7 +132,6 @@ class _ExerciseInfoBox(customtkinter.CTkFrame):
 
 
 class _WorkoutCalender(customtkinter.CTkTabview):
-
     def __init__(self, master):
         super().__init__(master)
 
@@ -163,4 +164,3 @@ class _WorkoutTab(customtkinter.CTkFrame):
 
         self.tab_label = customtkinter.CTkLabel(self, text=text)
         self.tab_label.grid(row=0, column=0, padx=0, pady=0)
-
