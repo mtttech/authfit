@@ -15,7 +15,7 @@ class ExerciseDatabase:
 
     def get_exercises_by_muscle_list(self, muscle):
         self.curs.execute(
-            "SELECT EID, name FROM exercises WHERE muscle=? ORDER BY name", (muscle,)
+            "SELECT name FROM exercises WHERE muscle=? ORDER BY name", (muscle,)
         )
         return self.curs.fetchall()
 
