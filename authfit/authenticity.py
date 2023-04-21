@@ -29,16 +29,20 @@ class Authenticity(customtkinter.CTk):
 
 def main() -> None:
     app_dir = os.path.dirname(__file__)
-    exercises_db = os.path.join(app_dir, 'assets/exercises.db')
+    exercises_db = os.path.join(app_dir, "assets/exercises.db")
 
     try:
         if not os.path.isfile(exercises_db):
-            print(f"Exercise database '{exercises_db}' exists: [bold][red]NOT OK[/red][/bold]")
+            print(
+                f"Exercise database '{exercises_db}' exists: [bold][red]NOT OK[/red][/bold]"
+            )
             raise RuntimeError
     except RuntimeError:
         exit(1)
     else:
-        print(f"Exercise database '{exercises_db}' exists: [bold][green]OK[/green][/bold]")
+        print(
+            f"Exercise database '{exercises_db}' exists: [bold][green]OK[/green][/bold]"
+        )
         app = Authenticity()
         app.mainloop()
 
