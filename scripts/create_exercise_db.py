@@ -6,7 +6,7 @@ import sqlite3
 import requests
 
 
-API_KEY = "Add your Api Ninja's key here!"
+API_KEY = "Enter API Ninjas' Key Here"
 APP_DIR = os.path.dirname(__file__)
 EXERCISE_DATABASE = Path(APP_DIR).parent / "authfit/assets/exercises.db"
 

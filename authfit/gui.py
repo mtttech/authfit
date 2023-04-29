@@ -5,64 +5,175 @@ import customtkinter
 from .assets import ExerciseDatabase
 
 
-class AuthenticityMainWindow(customtkinter.CTkFrame):
+def change_widget_state(widget, index, value) -> None:
+    widget.configure(state="normal")
+    widget.delete(index, "end")
+    widget.insert(index, value)
+    widget.configure(state="disabled")
+
+
+class _AFEntry(customtkinter.CTkEntry):
+    def __init__(self, master, width):
+        super().__init__(master, border_width=1, fg_color="#eeeeee", width=width)
+
+
+class AFMainWindow(customtkinter.CTk):
+    def __init__(self) -> None:
+        super().__init__()
+        self.title("Authenticity Fitness")
+        height, width = (655, 392)
+        self.geometry(f"{width}x{height}")
+        self.maxsize(width, height)
+        self.create_window()
+
+    def create_window(self) -> None:
+        tabview = AFTabview(self)
+        tabview.grid(column=0, row=0, padx=5, pady=5)
+
+
+class AFTabview(customtkinter.CTkTabview):
+    def __init__(self, master) -> None:
+        super().__init__(master, height=600, width=350)
+
+        self.add("Tracker")
+        self.add("Database")
+        self.set("Tracker")
+
+        tracker = AFTracker(self.tab("Tracker"))
+        tracker.grid(column=0, row=0)
+
+        database = AFDatabase(self.tab("Database"))
+        database.grid(column=0, row=0)
+
+
+class AFTracker(customtkinter.CTkFrame):
+    def __init__(self, master) -> None:
+        super().__init__(master, height=600, width=350)
+
+        workout_title = customtkinter.CTkEntry(
+            self,
+            border_width=1,
+            fg_color="transparent",
+            font=("Arial", 34),
+            placeholder_text="Workout Name...",
+            width=330,
+        )
+        workout_title.grid(column=0, row=0, padx=20, pady=10)
+
+        timer = customtkinter.CTkLabel(self, text="timer")
+        timer.grid(column=0, row=1)
+
+        wt = WorkoutTable(self, "Deadlift")
+        wt.grid(column=0, row=3, padx=10, pady=10)
+
+
+class WorkoutTable(customtkinter.CTkScrollableFrame):
+    def __init__(self, master, label):
+        super().__init__(
+            master, corner_radius=30, fg_color="#eeeeee", height=400, width=300
+        )
+
+        add_exercise = customtkinter.CTkButton(self, text="Add Exercise")
+
+        exercise_lbl = customtkinter.CTkLabel(self, text=label)
+
+        workout_notes = customtkinter.CTkTextbox(
+            self,
+            border_width=1,
+            fg_color="transparent",
+            height=50,
+            width=250,
+        )
+
+        lbl_set = customtkinter.CTkLabel(self, text="Set", width=40)
+        set_btn1 = customtkinter.CTkButton(self, text="1", width=40)
+        set_btn2 = customtkinter.CTkButton(self, text="2", width=40)
+        set_btn3 = customtkinter.CTkButton(self, text="3", width=40)
+        set_btn4 = customtkinter.CTkButton(self, text="4", width=40)
+
+        lbl_wgt = customtkinter.CTkLabel(self, text="Wgt. (kg)")
+        wgt_ety1 = _AFEntry(self, 40)
+        wgt_ety2 = _AFEntry(self, 40)
+        wgt_ety3 = _AFEntry(self, 40)
+        wgt_ety4 = _AFEntry(self, 40)
+
+        lbl_reps = customtkinter.CTkLabel(self, text="Reps", width=30)
+        rep_ety1 = _AFEntry(self, 30)
+        rep_ety2 = _AFEntry(self, 30)
+        rep_ety3 = _AFEntry(self, 30)
+        rep_ety4 = _AFEntry(self, 30)
+
+        add_exercise.grid(column=0, columnspan=3, row=0, padx=20, pady=20)
+        exercise_lbl.grid(column=0, columnspan=3, row=1, padx=5, pady=5)
+        workout_notes.grid(column=0, columnspan=3, row=2, padx=20, pady=10)
+        workout_notes.insert("0.0", "Notes...")
+
+        lbl_set.grid(column=0, row=3, padx=5, pady=5)
+        set_btn1.grid(column=0, row=4, padx=5, pady=5)
+        set_btn2.grid(column=0, row=5, padx=5, pady=5)
+        set_btn3.grid(column=0, row=6, padx=5, pady=5)
+        set_btn4.grid(column=0, row=7, padx=5, pady=5)
+
+        lbl_wgt.grid(column=1, row=3, padx=5, pady=5)
+        wgt_ety1.grid(column=1, row=4, padx=5, pady=5)
+        wgt_ety2.grid(column=1, row=5, padx=5, pady=5)
+        wgt_ety3.grid(column=1, row=6, padx=5, pady=5)
+        wgt_ety4.grid(column=1, row=7, padx=5, pady=5)
+
+        lbl_reps.grid(column=2, row=3, padx=5, pady=5)
+        rep_ety1.grid(column=2, row=4, padx=5, pady=5)
+        rep_ety2.grid(column=2, row=5, padx=5, pady=5)
+        rep_ety3.grid(column=2, row=6, padx=5, pady=5)
+        rep_ety4.grid(column=2, row=7, padx=5, pady=5)
+
+
+class AFDatabase(customtkinter.CTkFrame):
     DB_EXERCISES = ExerciseDatabase()
     MUSCLES_WORKED_OPTIONS = [m[0] for m in DB_EXERCISES.get_muscles_worked_list()]
-    INPUT_WIDGET_WIDTH = 400
+    LABEL_WIDGET_WIDTH = 180
+    OPTMENU_WIDGET_WIDTH = 350
 
-    def __init__(self, master):
-        super().__init__(master, width=self.INPUT_WIDGET_WIDTH)
-        # Muscle Group Label
-        self.muscle_selector_label = customtkinter.CTkLabel(self, text="Muscle Group")
-        self.muscle_selector_label.grid(row=0, column=0, padx=0, pady=(20, 0))
-        # Muscle Group Option Menu
-        self.muscle_selector_optionemenu = customtkinter.CTkOptionMenu(
+    def __init__(self, master) -> None:
+        super().__init__(master, height=600, width=350)
+
+        group_selector = customtkinter.CTkOptionMenu(
             self,
             values=self.MUSCLES_WORKED_OPTIONS,
-            width=300,
-            command=self._activate_exercise_option_menu,
+            width=self.OPTMENU_WIDGET_WIDTH,
+            command=self._activate_selector,
             anchor="center",
         )
-        self.muscle_selector_optionemenu.grid(row=1, column=0, padx=0, pady=0)
-        # Exercise Group Label
-        self.muscle_selector_label = customtkinter.CTkLabel(self, text="Exercises")
-        self.muscle_selector_label.grid(row=2, column=0, padx=0, pady=0)
-        # Exercise Group Option Menu
-        self.exercise_selector_optionemenu = customtkinter.CTkOptionMenu(
+        self.exercise_selector = customtkinter.CTkOptionMenu(
             self,
             values=["Select Muscle Group"],
-            width=300,
+            width=self.OPTMENU_WIDGET_WIDTH,
             state="disabled",
             command=self._fill_exercise_info_box,
             anchor="center",
         )
-        self.exercise_selector_optionemenu.grid(row=3, column=0, padx=0, pady=0)
-        # Exercise Info Box
-        self.infobox_frame = _ExerciseInfoBox(self)
-        self.infobox_frame.grid(row=4, column=0, padx=15, pady=(30, 20))
-
-        ## COL 2
-        self.workout_calender = _WorkoutCalender(self)
-        self.workout_calender.grid(
-            row=0, column=1, rowspan=5, padx=0, pady=0, sticky="nsew"
+        self.textbox_infobox = customtkinter.CTkTextbox(
+            self,
+            fg_color="transparent",
+            height=450,
+            width=330,
+            state="disabled",
+            text_color="#808080",
+            wrap="word",
         )
 
-    def _activate_exercise_option_menu(self, choice) -> None:
+        group_selector.grid(column=0, row=0, padx=10, pady=10)
+        self.exercise_selector.grid(column=0, row=1, padx=10, pady=10)
+        self.textbox_infobox.grid(column=0, row=2, padx=10, pady=10)
+
+    def _activate_selector(self, choice) -> None:
         exercises_by_muscle_list = self.DB_EXERCISES.get_exercises_by_muscle_list(
             choice
         )
         exercises_by_muscle_list = [e[0] for e in exercises_by_muscle_list]
-        self.exercise_selector_optionemenu.configure(
+        self.exercise_selector.configure(
             state="normal", values=exercises_by_muscle_list
         )
-        self.exercise_selector_optionemenu.set(exercises_by_muscle_list[0])
-
-    @staticmethod
-    def _change_disabled_input_value(widget, index, value) -> None:
-        widget.configure(state="normal")
-        widget.delete(index, "end")
-        widget.insert(index, value)
-        widget.configure(state="disabled")
+        self.exercise_selector.set(exercises_by_muscle_list[0])
 
     def _fill_exercise_info_box(self, choice) -> None:
         (
@@ -71,96 +182,5 @@ class AuthenticityMainWindow(customtkinter.CTkFrame):
             difficulty,
             instructions,
         ) = self.DB_EXERCISES.get_exercise_entry(choice)[0]
-        # Exercise type
-        AuthenticityMainWindow._change_disabled_input_value(
-            self.infobox_frame.label_type_entry, 0, exercise_type
-        )
-        # Exercise equipment
-        AuthenticityMainWindow._change_disabled_input_value(
-            self.infobox_frame.label_equip_entry, 0, equipment
-        )
-        # Exercise difficulty
-        AuthenticityMainWindow._change_disabled_input_value(
-            self.infobox_frame.label_difficulty_entry, 0, difficulty
-        )
         # Exercise instructions
-        AuthenticityMainWindow._change_disabled_input_value(
-            self.infobox_frame.textbox_infobox, 1.0, instructions
-        )
-
-
-class _ExerciseInfoBox(customtkinter.CTkFrame):
-    INPUT_WIDGET_WIDTH = 280
-
-    def __init__(self, master) -> None:
-        super().__init__(master, width=self.INPUT_WIDGET_WIDTH)
-        # Type Label
-        self.label_type = customtkinter.CTkLabel(self, text="Type")
-        self.label_type.grid(row=0, column=0, padx=10, pady=(10, 0))
-        # Type Entry
-        self.label_type_entry = customtkinter.CTkEntry(
-            self, width=self.INPUT_WIDGET_WIDTH, state="disabled"
-        )
-        self.label_type_entry.grid(row=1, column=0, padx=10, pady=0)
-        # Equipment Label
-        self.label_equip = customtkinter.CTkLabel(self, text="Equipment")
-        self.label_equip.grid(row=4, column=0)
-        # Equipment Entry
-        self.label_equip_entry = customtkinter.CTkEntry(
-            self, width=self.INPUT_WIDGET_WIDTH, state="disabled"
-        )
-        self.label_equip_entry.grid(row=5, column=0)
-        # Difficulty Label
-        self.label_difficulty = customtkinter.CTkLabel(self, text="Difficulty")
-        self.label_difficulty.grid(row=6, column=0)
-        # Difficulty Entry
-        self.label_difficulty_entry = customtkinter.CTkEntry(
-            self, width=self.INPUT_WIDGET_WIDTH, state="disabled"
-        )
-        self.label_difficulty_entry.grid(row=7, column=0)
-        # Infobox Label
-        self.label_infobox = customtkinter.CTkLabel(self, text="Instruction")
-        self.label_infobox.grid(row=8, column=0)
-        # Infobox Textbox
-        self.textbox_infobox = customtkinter.CTkTextbox(
-            self,
-            width=self.INPUT_WIDGET_WIDTH,
-            state="disabled",
-            wrap="word",
-        )
-        self.textbox_infobox.grid(row=9, column=0, padx=15, pady=(0, 15), sticky="nsew")
-
-
-class _WorkoutCalender(customtkinter.CTkTabview):
-    def __init__(self, master):
-        super().__init__(master)
-
-        self.add("Sunday")
-        self.add("Monday")
-        self.add("Tuesday")
-        self.add("Wednesday")
-        self.add("Thursday")
-        self.add("Friday")
-        self.add("Saturday")
-
-        # Sunday
-        self.sun_tab = customtkinter.CTkLabel(master=self.tab("Sunday"), text="Sunday")
-        self.sun_tab.grid(row=0, column=0, padx=10, pady=10)
-
-        # Monday
-        self.mon_tab = customtkinter.CTkLabel(master=self.tab("Monday"), text="Monday")
-        self.mon_tab.grid(row=0, column=0, padx=10, pady=10)
-
-        # Tuesday
-        self.tue_tab = _WorkoutTab(self.tab("Tuesday"), "Tuesday")
-        self.tue_tab.grid(row=0, column=0, padx=10, pady=10)
-
-
-class _WorkoutTab(customtkinter.CTkFrame):
-    INPUT_WIDGET_WIDTH = 400
-
-    def __init__(self, master, text):
-        super().__init__(master, width=self.INPUT_WIDGET_WIDTH)
-
-        self.tab_label = customtkinter.CTkLabel(self, text=text)
-        self.tab_label.grid(row=0, column=0, padx=0, pady=0)
+        change_widget_state(self.textbox_infobox, 1.0, instructions)
