@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "authfit"
+version = "0.1.0"
+description = "Workout tracking app."
+authors = ["Marcus T Taylor <mtaylor9754@hotmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+rich = "^13.4.1"
+customtkinter = "^5.1.3"
+
+[tool.poetry.scripts]
+authfit = 'authfit.authenticity:main'
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -3,7 +3,7 @@ import os
 import customtkinter
 from rich import print
 
-from .gui import AFMainWindow
+from authfit.gui import AFMainWindow
 
 
 customtkinter.set_appearance_mode("System")

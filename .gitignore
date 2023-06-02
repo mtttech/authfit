@@ -138,3 +138,6 @@ dmypy.json
 
 # Scripts
 scripts/
+
+# Poetry
+poetry.lock

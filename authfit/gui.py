@@ -2,7 +2,7 @@ import datetime
 
 import customtkinter
 
-from .assets import ExerciseDatabase
+from authfit.assets import ExerciseDatabase
 
 
 def change_widget_state(widget, index, value) -> None:

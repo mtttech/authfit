@@ -1,4 +1,4 @@
-from .authenticity import main
+from authfit.authenticity import main
 
 
 if __name__ == "__main__":
