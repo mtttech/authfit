@@ -26,7 +26,7 @@ Authenticity Fitness requires the following python library.
 ## Usage
 
 ```
-git clone https://https://github.com/mtttech/authfit
+git clone https://github.com/mtttech/authfit
 
 cd authfit
 
