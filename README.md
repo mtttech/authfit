@@ -25,10 +25,14 @@ Authenticity Fitness requires the following python library.
 
 ## Usage
 
+You can install authfit from GitHub directly if you prefer.
+
 ```
-git clone https://github.com/mtttech/authfit
+python -m pip install -e git+git://github.com/mtttech/authfit.git#egg=authfit
+```
 
-cd authfit
+You can run the app with the following command.
 
-python -m authfit
+```
+authfit
 ```

@@ -1,20 +1,30 @@
-[tool.poetry]
+[project]
 name = "authfit"
-version = "0.1.0"
-description = "Workout tracking app."
-authors = ["Marcus T Taylor <mtaylor9754@hotmail.com>"]
-license = "MIT"
+version = "0.0.1"
+description = "Workout tracking/exercise database app."
 readme = "README.md"
+requires-python = ">3.9"
+license = { text="MIT" }
+keywords = ["workout"]
+authors = [
+    { name="Marcus Taylor", email="mtaylor9754@hotmail.com" },
+]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = ["customtkinter", "rich"]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-rich = "^13.4.1"
-customtkinter = "^5.1.3"
 
-[tool.poetry.scripts]
-authfit = 'authfit.authenticity:main'
+[project.urls]
+"Homepage" = "https://github.com/mtttech/authfit"
+"Issues" = "https://github.com/mtttech/authfit/issues"
+
+
+[project.scripts]
+authfit = "authfit.authenticity:main"
 
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools >= 67.0", "wheel >= 0.40"]
+build-backend = "setuptools.build_meta"
