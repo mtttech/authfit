@@ -20,7 +20,6 @@ The exercise information within the database is borrowed from [API Ninjas](https
 Authenticity Fitness requires the following python library.
 
 * [customtkinter](https://github.com/TomSchimansky/CustomTkinter)
-* [rich](https://github.com/Textualize/rich)
 
 
 ## Usage
