@@ -2,26 +2,37 @@ import os
 import sqlite3
 
 
-class ExerciseDatabase:
-    EXERCISE_DATABASE = os.path.join(os.path.dirname(__file__), "assets/exercises.db")
+class AuthenticityDatabase:
+    def __init__(self) -> None:
+        self.db_path = os.path.join(os.path.dirname(__file__), "assets/exercises.db")
 
-    def __init__(self):
-        conn = sqlite3.connect(self.EXERCISE_DATABASE)
-        self.curs = conn.cursor()
+    def __enter__(self):
+        self.conn = sqlite3.connect(self.db_path)
+        cursor = self.conn.cursor()
+        return cursor
 
-    def get_muscles_worked_list(self):
-        self.curs.execute("SELECT DISTINCT muscle FROM exercises")
-        return self.curs.fetchall()
+    def __exit__(self, _type, value, traceback):
+        self.conn.close()
 
-    def get_exercises_by_muscle_list(self, muscle):
-        self.curs.execute(
-            "SELECT name FROM exercises WHERE muscle=? ORDER BY name", (muscle,)
-        )
-        return self.curs.fetchall()
 
-    def get_exercise_entry(self, name):
-        self.curs.execute(
+def get_exercise_entry(name) -> list:
+    with AuthenticityDatabase() as cursor:
+        result = cursor.execute(
             "SELECT type, equipment, difficulty, instructions FROM exercises WHERE name=?",
             (name,),
         )
-        return self.curs.fetchall()
+        return result.fetchall()
+
+
+def get_exercises_by_group(muscle: str) -> list:
+    with AuthenticityDatabase() as cursor:
+        result = cursor.execute(
+            "SELECT name FROM exercises WHERE muscle=? ORDER BY name", (muscle,)
+        )
+        return result.fetchall()
+    
+
+def get_muscle_groups() -> list:
+    with AuthenticityDatabase() as cursor:
+        result = cursor.execute("SELECT DISTINCT muscle FROM exercises")
+        return result.fetchall()
