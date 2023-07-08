@@ -7,63 +7,59 @@ from authfit.assets import get_exercises_by_group, get_muscle_groups
 
 
 class ExerciseSelectionWidget(customtkinter.CTkFrame):
+    W_ENTRY_WIDTH = 30
+
     def __init__(self, master) -> None:
         super().__init__(master)
         self.entry_secs_state = True
         self.entry_wgt_state = True
 
-        ex_reps1 = customtkinter.CTkLabel(self, text="Set")
-        ex_reps2 = customtkinter.CTkLabel(self, text="Set")
-        ex_reps3 = customtkinter.CTkLabel(self, text="Set")
-        ex_wgt1 = customtkinter.CTkLabel(self, text="Weight")
-        ex_wgt2 = customtkinter.CTkLabel(self, text="Weight")
-        ex_wgt3 = customtkinter.CTkLabel(self, text="Weight")
-        ex_secs1 = customtkinter.CTkLabel(self, text="Seconds")
-        ex_secs2 = customtkinter.CTkLabel(self, text="Seconds")
-        ex_secs3 = customtkinter.CTkLabel(self, text="Seconds")
+        ex_reps = customtkinter.CTkLabel(self, text="Set")
+        ex_wgt = customtkinter.CTkLabel(self, text="Weight")
+        ex_secs = customtkinter.CTkLabel(self, text="Seconds")
 
         self.ex_selector = customtkinter.CTkOptionMenu(
             self,
             anchor="center",
             state="disabled",
-            values=["Select a muscle group first"],
+            values=["[ SELECT A MUSCLE GROUP FIRST ]"],
             width=300,
         )
         self.ex_reps1 = customtkinter.CTkEntry(
             self,
-            width=60,
+            width=self.W_ENTRY_WIDTH,
         )
         self.ex_reps2 = customtkinter.CTkEntry(
             self,
-            width=60,
+            width=self.W_ENTRY_WIDTH,
         )
         self.ex_reps3 = customtkinter.CTkEntry(
             self,
-            width=60,
+            width=self.W_ENTRY_WIDTH,
         )
         self.ex_wgt1 = customtkinter.CTkEntry(
             self,
-            width=60,
+            width=self.W_ENTRY_WIDTH,
         )
         self.ex_wgt2 = customtkinter.CTkEntry(
             self,
-            width=60,
+            width=self.W_ENTRY_WIDTH,
         )
         self.ex_wgt3 = customtkinter.CTkEntry(
             self,
-            width=60,
+            width=self.W_ENTRY_WIDTH,
         )
         self.ex_secs1 = customtkinter.CTkEntry(
             self,
-            width=60,
+            width=self.W_ENTRY_WIDTH,
         )
         self.ex_secs2 = customtkinter.CTkEntry(
             self,
-            width=60,
+            width=self.W_ENTRY_WIDTH,
         )
         self.ex_secs3 = customtkinter.CTkEntry(
             self,
-            width=60,
+            width=self.W_ENTRY_WIDTH,
         )
         self.ex_wgt_na = customtkinter.CTkButton(
             self,
@@ -78,28 +74,22 @@ class ExerciseSelectionWidget(customtkinter.CTkFrame):
             width=60,
         )
 
-        ex_reps1.grid(row=0, column=1, padx=2, pady=2)
-        ex_reps2.grid(row=0, column=2, padx=2, pady=2)
-        ex_reps3.grid(row=0, column=3, padx=2, pady=2)
-        ex_wgt1.grid(row=0, column=4, padx=2, pady=2)
-        ex_wgt2.grid(row=0, column=5, padx=2, pady=2)
-        ex_wgt3.grid(row=0, column=6, padx=2, pady=2)
-        ex_secs1.grid(row=0, column=7, padx=2, pady=2)
-        ex_secs2.grid(row=0, column=8, padx=2, pady=2)
-        ex_secs3.grid(row=0, column=9, padx=2, pady=2)
+        ex_reps.grid(row=0, column=1, columnspan=3, padx=2, pady=2)
+        ex_wgt.grid(row=0, column=4, columnspan=3, padx=2, pady=2)
+        ex_secs.grid(row=0, column=7, columnspan=3, padx=2, pady=2)
 
-        self.ex_selector.grid(row=1, column=0, padx=5, pady=5)
-        self.ex_reps1.grid(row=1, column=1, padx=5, pady=5)
-        self.ex_reps2.grid(row=1, column=2, padx=5, pady=5)
-        self.ex_reps3.grid(row=1, column=3, padx=5, pady=5)
-        self.ex_wgt1.grid(row=1, column=4, padx=5, pady=5)
-        self.ex_wgt2.grid(row=1, column=5, padx=5, pady=5)
-        self.ex_wgt3.grid(row=1, column=6, padx=5, pady=5)
-        self.ex_secs1.grid(row=1, column=7, padx=5, pady=5)
-        self.ex_secs2.grid(row=1, column=8, padx=5, pady=5)
-        self.ex_secs3.grid(row=1, column=9, padx=5, pady=5)
-        self.ex_wgt_na.grid(row=1, column=10, padx=5, pady=5)
-        self.ex_secs_na.grid(row=1, column=11, padx=5, pady=5)
+        self.ex_selector.grid(row=1, column=0, padx=2, pady=2)
+        self.ex_reps1.grid(row=1, column=1, padx=5, pady=2)
+        self.ex_reps2.grid(row=1, column=2, padx=2, pady=2)
+        self.ex_reps3.grid(row=1, column=3, padx=2, pady=2)
+        self.ex_wgt1.grid(row=1, column=4, padx=2, pady=2)
+        self.ex_wgt2.grid(row=1, column=5, padx=2, pady=2)
+        self.ex_wgt3.grid(row=1, column=6, padx=2, pady=2)
+        self.ex_secs1.grid(row=1, column=7, padx=2, pady=2)
+        self.ex_secs2.grid(row=1, column=8, padx=2, pady=2)
+        self.ex_secs3.grid(row=1, column=9, padx=2, pady=2)
+        self.ex_wgt_na.grid(row=1, column=10, padx=2, pady=2)
+        self.ex_secs_na.grid(row=1, column=11, padx=2, pady=2)
 
     def toggle_secs_state(self) -> None:
         self.ex_secs1.delete(0, END)
@@ -183,7 +173,6 @@ class ApplicationWindow(customtkinter.CTkFrame):
         self.wr3.ex_selector.set(exercises_by_group[0])
         self.wr4.ex_selector.configure(state="normal", values=exercises_by_group)
         self.wr4.ex_selector.set(exercises_by_group[0])
-
 
 
 class Application(customtkinter.CTk):
