@@ -162,7 +162,7 @@ class ApplicationWindow(customtkinter.CTkFrame):
         self.wr4.grid(row=6, column=0)
         self.notes.grid(row=7, column=0, padx=5, pady=5, sticky="we")
         self.save_btn.grid(row=8, column=0, pady=(5, 10))
-
+ 
     def activate_selector(self, choice) -> None:
         exercises_by_group = [e[0] for e in get_exercises_by_group(choice)]
         self.wr1.ex_selector.configure(state="normal", values=exercises_by_group)
